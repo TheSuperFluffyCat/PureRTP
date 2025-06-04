@@ -1,4 +1,4 @@
-name: rtp
+name: PureRTP
 version: '1'
 main: de.survivalnight.luna.rtp.Rtp
 api-version: '1.21'

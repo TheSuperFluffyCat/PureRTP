@@ -2,7 +2,8 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/TheSuperFluffyCat/PureRTP)
 ![SpigotMC](https://img.shields.io/badge/SpigotMC-Compatible-orange)
-![License](https://img.shields.io/badge/License-Custom--NonCommercial-red)
+![License](https://img.shields.io/badge/License--important)
+
 
 ---
 
