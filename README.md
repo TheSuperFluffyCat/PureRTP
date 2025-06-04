@@ -44,10 +44,10 @@ After the first run, a configuration file will be generated in the `plugins/Pure
 
 ## 🧪 Commands & Permissions
 
-| Command       | Description                     | Permission         |
-|---------------|---------------------------------|--------------------|
-| `/rtp`        | Opens the teleportation GUI     | `purertp.use`      |
-| `/rtp reload` | Reloads the plugin configuration| `purertp.admin`    |
+| Command       | Description                     | Permission   |
+|---------------|---------------------------------|--------------|
+| `/rtp`        | Opens the teleportation GUI     | `rtp.use`    |
+| `/rtp reload` | Reloads the plugin configuration| `rtp.reload` |
 
 ---
 
@@ -88,10 +88,10 @@ For full license details, refer to the [LICENSE](./LICENSE) file.
 
 ### 🧪 コマンドと権限
 
-| コマンド       | 説明                          | 権限               |
-|----------------|-------------------------------|--------------------|
-| `/rtp`         | テレポートGUIを開く           | `purertp.use`      |
-| `/rtp reload`  | プラグインの設定をリロードする| `purertp.admin`    |
+| コマンド       | 説明                          | 権限           |
+|----------------|-------------------------------|--------------|
+| `/rtp`         | テレポートGUIを開く           | `rtp.use`    |
+| `/rtp reload`  | プラグインの設定をリロードする| `rtp.reload` |
 
 ### 📜 ライセンス
 
