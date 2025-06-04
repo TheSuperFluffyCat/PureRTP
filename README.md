@@ -119,22 +119,8 @@ For support, suggestions, or feedback:
 
 ---
 
-## 📸 Screenshots
 
-![GUI Preview](./images/gui_preview.png)
-*Teleportation GUI*
 
-![Teleportation Example](./images/teleportation_example.png)
-*Random Teleportation in action*
-
----
-
-## 🔗 Related Projects
-
-- [BetterRTP](https://www.spigotmc.org/resources/betterrtp.36081/)
-- [RandomTP](https://github.com/DEVS-MARKET/RandomTP-Minecraft-Plugin)
-
----
 
 ## 📝 Changelog
 
