@@ -1,0 +1,18 @@
+name: rtp
+version: '1'
+main: de.survivalnight.luna.rtp.Rtp
+api-version: '1.21'
+authors: [ Fluffy ]
+commands:
+  rtp:
+    description: Öffnet das RTP Menü oder lädt die Config neu
+    usage: /rtp [reload]
+    permission: rtp.use
+    permission-message: §cDazu hast du keine Rechte!
+permissions:
+  rtp.use:
+    description: Öffnet das RTP Menü
+    default: true
+  rtp.reload:
+    description: Reloadet die Config
+    default: op

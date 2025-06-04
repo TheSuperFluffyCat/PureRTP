@@ -1,0 +1,40 @@
+cooldown-seconds: 60
+
+messages:
+  teleport-success: "<green>Du wurdest sicher teleportiert!</green>"
+  teleport-fail: "<red>Keine sichere Position gefunden.</red>"
+  no-permission: "<red>Dazu hast du keine Rechte.</red>"
+  cooldown-wait: "<red>Warte noch <yellow><seconds>s</yellow> bis zum nächsten RTP.</red>"
+  config-reloaded: "<green>Die Config wurde neu geladen!</green>"
+  world-not-found: "<red>Diese Welt existiert nicht.</red>"
+
+gui:
+  overworld:
+    material: GRASS_BLOCK
+    name: "&aOverworld"
+    lore:
+      - "&7Teleportiere dich"
+      - "&7in die normale Welt!"
+    slot: 11
+    world: world
+    range: 5500
+
+  nether:
+    material: NETHERRACK
+    name: "&cNether"
+    lore:
+      - "&7Vorsicht, heiß!"
+      - "&7Nether-Teleport"
+    slot: 13
+    world: world_nether
+    range: 2300
+
+  end:
+    material: END_STONE
+    name: "&dEnd"
+    lore:
+      - "&7Das Ende..."
+      - "&7Willst du das riskieren?"
+    slot: 15
+    world: world_the_end
+    range: 5500
