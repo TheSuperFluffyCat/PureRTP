@@ -4,6 +4,8 @@ import de.survivalnight.luna.rtp.Rtp;
 import de.survivalnight.luna.rtp.logic.ColorUtil;
 import de.survivalnight.luna.rtp.logic.RtpManager;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -20,7 +22,17 @@ import java.util.List;
 public class RtpGui implements Listener {
 
     public static void open(Player player) {
-        Inventory inv = Bukkit.createInventory(null, 27, "§b§lRandom Teleport");
+        // Lade Titel aus Config
+        String rawTitle = Rtp.getInstance().getConfig().getString("gui-title", "<bold><aqua>Random Teleport</bold>");
+        Component titleComponent = ColorUtil.mm(rawTitle).decoration(TextDecoration.ITALIC, false);
+        String legacyTitle = LegacyComponentSerializer.legacySection().serialize(titleComponent);
+
+        // Lade Reihenanzahl aus Config
+        int rows = Rtp.getInstance().getConfig().getInt("gui-rows", 3);
+        rows = Math.max(1, Math.min(6, rows)); // nur 1–6 erlaubt
+        int size = rows * 9;
+
+        Inventory inv = Bukkit.createInventory(null, size, legacyTitle);
 
         ConfigurationSection buttons = Rtp.getInstance().getConfig().getConfigurationSection("gui");
         if (buttons != null) {
@@ -36,11 +48,15 @@ public class RtpGui implements Listener {
                 ItemMeta meta = item.getItemMeta();
 
                 String name = section.getString("name", "&aTeleport");
-                meta.displayName(ColorUtil.mm(name));
+                Component nameComponent = ColorUtil.mm(name).decoration(TextDecoration.ITALIC, false);
+                meta.displayName(nameComponent);
 
                 List<String> lore = section.getStringList("lore");
                 if (!lore.isEmpty()) {
-                    List<Component> parsedLore = lore.stream().map(ColorUtil::mm).toList();
+                    List<Component> parsedLore = lore.stream()
+                            .map(ColorUtil::mm)
+                            .map(c -> c.decoration(TextDecoration.ITALIC, false))
+                            .toList();
                     meta.lore(parsedLore);
                 }
 
@@ -54,14 +70,21 @@ public class RtpGui implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {
-        if (!e.getView().getTitle().equals("§b§lRandom Teleport")) return;
+        // Vergleiche Titel über Component
+        String rawTitle = Rtp.getInstance().getConfig().getString("gui-title", "<bold><aqua>Random Teleport</bold>");
+        Component configTitle = ColorUtil.mm(rawTitle).decoration(TextDecoration.ITALIC, false);
+        String expectedTitle = LegacyComponentSerializer.legacySection().serialize(configTitle);
+
+        if (!e.getView().getTitle().equals(expectedTitle)) return;
         e.setCancelled(true);
         if (!(e.getWhoClicked() instanceof Player player)) return;
 
         ItemStack clicked = e.getCurrentItem();
         if (clicked == null || !clicked.hasItemMeta() || !clicked.getItemMeta().hasDisplayName()) return;
 
-        String clickedName = clicked.getItemMeta().getDisplayName();
+        String legacyName = clicked.getItemMeta().getDisplayName();
+        Component clickedComponent = LegacyComponentSerializer.legacySection().deserialize(legacyName)
+                .decoration(TextDecoration.ITALIC, false);
 
         ConfigurationSection buttons = Rtp.getInstance().getConfig().getConfigurationSection("gui");
         if (buttons == null) return;
@@ -71,7 +94,11 @@ public class RtpGui implements Listener {
             if (sec == null) continue;
 
             String configName = sec.getString("name");
-            if (configName == null || !clickedName.equals(ColorUtil.translateColor(configName))) continue;
+            if (configName == null) continue;
+
+            Component configComponent = ColorUtil.mm(configName).decoration(TextDecoration.ITALIC, false);
+
+            if (!clickedComponent.equals(configComponent)) continue;
 
             String world = sec.getString("world");
             int range = sec.getInt("range", 1000);

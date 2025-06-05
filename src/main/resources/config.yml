@@ -1,6 +1,8 @@
 cooldown-seconds: 60
 # Op players will not have a cooldown
 
+gui-title: "<bold><#00ffff>🔀 Random Teleport</bold>"
+gui-rows: 3
 
 messages:
   teleport-success: "<green>You have been safely teleported.</green>"
